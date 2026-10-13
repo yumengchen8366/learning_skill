@@ -62,3 +62,7 @@
 - research-rui-1012 / research-cscan-week K3：助手在家核对代码，"进实验室在代码里确认阻抗"已完成——CH A 阻抗由 AlazarInputControlEx 设（bscan_test.m:260 写死 IMPEDANCE_50_OHM）；TRIG IN 只有 AlazarSetExternalTrigger（耦合 + 量程），ETR_5V = ETR_5V_50OHM = 0，软件设不了阻抗。
 - 数据手册 v1.5Q 第 4 页写 TRIG IN 1 MΩ，但 10/9 实测 50.2 Ω / Top 1.96 V；原判断"三通并入 CH A 的 50 Ω" → 修正为不太可能（G1、G2 是独立通道）；冲突保留为手册 vs 实物，计算暂按实测 50 Ω。
 - "约 3 s 卡住"：原推测"未重新 Post" → 修正为更可能是 readwrite 阻塞（8 个 buffer 已全部预先 Post），待用户确认当时是否报错。
+
+## 2026-10-13 · 2026-10-13-rui-meeting-1012c
+- research-rui-1012：会议整理稿和原始转录已存入 Research-PAM 仓库 `02_笔记与上下文/会谈记录/`。
+- 更正：原判断（助手按 ATS9462 规格书 v1.5P：TRIG IN 固定 1.01 MΩ，与 K3「50 Ω」冲突）→ 修正（TRIG IN 是 50 Ω）→ 依据：bscan_test.m 第 262 行 ETR_5V = ETR_5V_50OHM（AlazarDefs.m 第 524/527 行）、10/9 万用表 50.2 Ω。用户 10/13「阻抗由 SDK 代码设置」的判断正确。「进实验室确认阻抗」待办改为「看懂 bscan_test.m 第 260–262 行」。
