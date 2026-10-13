@@ -57,3 +57,8 @@
 
 ## 2026-10-13 · 2026-10-13-rui-meeting-1012b
 - research-rui-1012：针对 TRIG IN 阻抗冲突，用户判断阻抗是在 SDK 代码里设置的（未核对代码），选定进实验室时确认：查 AlazarInputControl（CH A）和 AlazarSetExternalTrigger（TRIG IN）的实际参数和代码行。已加入该主题待办，冲突仍为待确认。
+
+## 2026-10-13 · 2026-10-13-impedance-code-check
+- research-rui-1012 / research-cscan-week K3：助手在家核对代码，"进实验室在代码里确认阻抗"已完成——CH A 阻抗由 AlazarInputControlEx 设（bscan_test.m:260 写死 IMPEDANCE_50_OHM）；TRIG IN 只有 AlazarSetExternalTrigger（耦合 + 量程），ETR_5V = ETR_5V_50OHM = 0，软件设不了阻抗。
+- 数据手册 v1.5Q 第 4 页写 TRIG IN 1 MΩ，但 10/9 实测 50.2 Ω / Top 1.96 V；原判断"三通并入 CH A 的 50 Ω" → 修正为不太可能（G1、G2 是独立通道）；冲突保留为手册 vs 实物，计算暂按实测 50 Ω。
+- "约 3 s 卡住"：原推测"未重新 Post" → 修正为更可能是 readwrite 阻塞（8 个 buffer 已全部预先 Post），待用户确认当时是否报错。

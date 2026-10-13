@@ -1,7 +1,7 @@
 # Yumeng 学习与科研进度
 
 最近更新：2026-10-13（America/New_York）
-更新标识：2026-10-13-rui-meeting-1012b
+更新标识：2026-10-13-impedance-code-check
 最近活动主题：research-rui-1012（10/12 与 Rui 一对一会议记录、要求与待办）；research-cscan-week（10/13 这周完成 C-scan 测试，按知识点逐日记录）；course-ebme615-bc-talk、research-bscan-report 保留
 
 ## 已明确的需求与偏好
@@ -29,7 +29,7 @@
 |---|---|---|---|---|---|
 | K1 | `bscan_test.m` 6 段的执行顺序（参数 → 换算 → 时序 → 检查 → 运行 → 快速检查） | bscan_test.m §1–6 | 未知（本周未检验） | 10/13 计划建立 | 讲解后当天 |
 | K2 | 时序表：DO 各列（STEP/DIR/DAQ 触发/激光）、每 K 步一个触发、借 AI 时钟 ≤250 kS/s | bscan_test.m §4；docs/13 | 10/11 部分：行数计算（pScan）没内化（见 research-bscan-report Q4） | 10/13 计划建立 | 讲解后当天 |
-| K3 | 触发链：P0.6 → USER 1 → DG852 → G1 → TRIG IN（50 Ω，阈值约 0.87 V）/ G2 → CH A | docs/13 §1–3.3 | 10/11 部分：阈值余量因果答错后已讲（Q3） | 10/13 计划建立；10/12 Rui 要求知道阻抗在哪设、写进程序；10/13 助手查 ATS9462 手册：TRIG IN 固定 1.01 MΩ，50 Ω/1 MΩ 可选的是 CH A/B → 与本行「TRIG IN 50 Ω」冲突，待确认（见 research-rui-1012） | — |
+| K3 | 触发链：P0.6 → USER 1 → DG852 → G1 → TRIG IN（50 Ω，阈值约 0.87 V）/ G2 → CH A | docs/13 §1–3.3 | 10/11 部分：阈值余量因果答错后已讲（Q3） | 10/13 计划建立；10/12 Rui 要求知道阻抗在哪设、写进程序；10/13 助手查 ATS9462 手册：TRIG IN 固定 1.01 MΩ，50 Ω/1 MΩ 可选的是 CH A/B → 与本行「TRIG IN 50 Ω」冲突，待确认（见 research-rui-1012）；10/13 晚核对代码：TRIG IN 阻抗软件设不了（ETR_5V = ETR_5V_50OHM = 0），实测 50.2 Ω 仍成立，冲突在手册与实物之间 | — |
 | K4 | ATS NPT AutoDMA：Post → StartCapture → Wait → Abort；buffer 字节数；dual-port 板载内存在 readwrite 阻塞时接住数据 | ats9462_multi_aline.m；docs/12 | 10/11 自述不了解，已讲（Q6）；10/12 会上 record/buffer/ring buffer 说不清，已讲 | 10/13 计划建立；dual-port 代码核对进行中；10/12 Rui 要求 dual-port 一边采一边存；10/13 手册核对：dual-port AutoDMA 即推荐模式，buffer 处理完须重新 Post（推测为「约 3 s 卡住」原因，未核对代码） | — |
 | K5 | Y 轴：接线（P0.2/P0.3 待核对）、拨码、µm/脉冲、方向、速度上限 | docs/01；test2.m | 未开始 | 10/13 计划建立；10/12 会上用户说本周检查 Y 方向 | — |
 | K6 | C-scan 结构：每行 arm → 输出一行时序 → 取数据 → X 回程 + Y 步进 → 检查停止；数据排成 时间 × X × Y | 待写 `cscan_test.m`；Maria C_scan.py 作对照 | 未开始 | 10/13 计划建立 | — |
@@ -66,6 +66,9 @@
   - record 长度 ≥ 256 点且为 32 的倍数（1024 符合）。
 - 冲突（待确认）：research-cscan-week K3 写「TRIG IN 50 Ω」，手册为固定 1.01 MΩ。可能原因（推测）：三通把 CH A 的 50 Ω 负载并入，万用表量到的是 CH A。核实：查程序里 AlazarInputControl / AlazarSetExternalTrigger 的参数，断开三通分别量。
   - 用户 10/13 判断：阻抗应是在 SDK 代码里设置的（用户判断，未核对代码）。决定进实验室时作为待办确认。
+  - 10/13 晚助手核对代码 [文件确认]：CH A 阻抗在 `AlazarInputControlEx(..., IMPEDANCE_50_OHM)`（Research-PAM `07_MATLAB/bscan_test.m:260`，直接写在调用里；`ats9462_multi_aline.m:49` 是 `cfg.inputImpedanceId`，第 170 行调用）。TRIG IN 只有 `AlazarSetExternalTrigger(board, DC_COUPLING, ETR_5V)`（bscan_test.m:262），只设耦合和量程，**没有阻抗参数**；`AlazarDefs.m:524/527` 里 `ETR_5V = ETR_5V_50OHM = 0`，代码里选不了 TRIG IN 阻抗。→ 待办「进实验室在代码里确认」已在家完成：CH A 可设，TRIG IN 不能用软件设。
+  - 数据手册 `01_硬件资料/ATS9462v15Q.pdf`（v1.5Q，2025-12）第 4 页确实写 TRIG IN「1 MΩ input impedance」[文件确认]。但实测 [实测，Research-PAM docs/13 §3.3，10/9]：万用表直接量 TRIG IN 50.2 Ω；发生器 Load 模式 2 Vpp 到 TRIG IN 端 Top 1.96 V（1 MΩ 时应约 4 V）。「三通把 CH A 的 50 Ω 并入」不太可能：G1（→ TRIG IN）和 G2（→ CH A）是发生器两个独立通道，G1 的三通另一头是示波器（1 MΩ）。冲突仍待确认（这块卡的硬件版本与手册不同？问 AlazarTech 或看板卡标签），在此之前计算按实测 50 Ω。
+- 「约 3 s 卡住」的含义（待确认，助手判断）：bscan_test.m 是 8 个 buffer 一次全部 Post（docs/12 §三点五），不需要中途重新 Post；「卡住」更可能是 `readwrite` 输出时序期间 MATLAB 被阻塞（docs/12 记约 2.3 s），扫描结束后正常返回，不是报错。上面「需重新 Post 是卡住原因」的推测先不采用。需用户确认当时是否报错。
 - 条件计算：phase 324° 与 252° 若信号发生器为 100 kHz（周期 10 µs），对应 1 µs 与 3 µs，差 2 µs，与实测 1.97 µs 吻合 [条件计算，前提 频率 = 100 kHz，待确认]。
 - 待确认：采集卡型号（AlazarGetBoardKind）；程序里 CH A 阻抗/量程/耦合、TRIG IN 量程与阈值代码、带宽限制开关、AutoDMA 模式与是否重新 Post；卡住时的错误代码；信号发生器输出模式（50 Ω / High-Z）与延时测试频率；换能器中心频率与带宽；SR2 细分、额定电流、「0.3」单位、丝杠导程；「这一方向」是否为 Z；Jennifer 的切片厚度与交接方式；Rui 指定的是哪种采集方式。
 - 下一步（会上定的待办，尚未执行）：
