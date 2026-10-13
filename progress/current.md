@@ -1,8 +1,8 @@
 # Yumeng 学习与科研进度
 
 最近更新：2026-10-13（America/New_York）
-更新标识：2026-10-13-cscan-week-setup
-最近活动主题：research-cscan-week（10/13 这周完成 C-scan 测试，按知识点逐日记录）；course-ebme615-bc-talk、research-bscan-report 保留
+更新标识：2026-10-13-rui-meeting-1012
+最近活动主题：research-rui-1012（10/12 与 Rui 一对一会议记录、要求与待办）；research-cscan-week（10/13 这周完成 C-scan 测试，按知识点逐日记录）；course-ebme615-bc-talk、research-bscan-report 保留
 
 ## 已明确的需求与偏好
 
@@ -29,9 +29,9 @@
 |---|---|---|---|---|---|
 | K1 | `bscan_test.m` 6 段的执行顺序（参数 → 换算 → 时序 → 检查 → 运行 → 快速检查） | bscan_test.m §1–6 | 未知（本周未检验） | 10/13 计划建立 | 讲解后当天 |
 | K2 | 时序表：DO 各列（STEP/DIR/DAQ 触发/激光）、每 K 步一个触发、借 AI 时钟 ≤250 kS/s | bscan_test.m §4；docs/13 | 10/11 部分：行数计算（pScan）没内化（见 research-bscan-report Q4） | 10/13 计划建立 | 讲解后当天 |
-| K3 | 触发链：P0.6 → USER 1 → DG852 → G1 → TRIG IN（50 Ω，阈值约 0.87 V）/ G2 → CH A | docs/13 §1–3.3 | 10/11 部分：阈值余量因果答错后已讲（Q3） | 10/13 计划建立 | — |
-| K4 | ATS NPT AutoDMA：Post → StartCapture → Wait → Abort；buffer 字节数；dual-port 板载内存在 readwrite 阻塞时接住数据 | ats9462_multi_aline.m；docs/12 | 10/11 自述不了解，已讲（Q6） | 10/13 计划建立；dual-port 代码核对进行中 | — |
-| K5 | Y 轴：接线（P0.2/P0.3 待核对）、拨码、µm/脉冲、方向、速度上限 | docs/01；test2.m | 未开始 | 10/13 计划建立 | — |
+| K3 | 触发链：P0.6 → USER 1 → DG852 → G1 → TRIG IN（50 Ω，阈值约 0.87 V）/ G2 → CH A | docs/13 §1–3.3 | 10/11 部分：阈值余量因果答错后已讲（Q3） | 10/13 计划建立；10/12 Rui 要求知道阻抗在哪设、写进程序；10/13 助手查 ATS9462 手册：TRIG IN 固定 1.01 MΩ，50 Ω/1 MΩ 可选的是 CH A/B → 与本行「TRIG IN 50 Ω」冲突，待确认（见 research-rui-1012） | — |
+| K4 | ATS NPT AutoDMA：Post → StartCapture → Wait → Abort；buffer 字节数；dual-port 板载内存在 readwrite 阻塞时接住数据 | ats9462_multi_aline.m；docs/12 | 10/11 自述不了解，已讲（Q6）；10/12 会上 record/buffer/ring buffer 说不清，已讲 | 10/13 计划建立；dual-port 代码核对进行中；10/12 Rui 要求 dual-port 一边采一边存；10/13 手册核对：dual-port AutoDMA 即推荐模式，buffer 处理完须重新 Post（推测为「约 3 s 卡住」原因，未核对代码） | — |
+| K5 | Y 轴：接线（P0.2/P0.3 待核对）、拨码、µm/脉冲、方向、速度上限 | docs/01；test2.m | 未开始 | 10/13 计划建立；10/12 会上用户说本周检查 Y 方向 | — |
 | K6 | C-scan 结构：每行 arm → 输出一行时序 → 取数据 → X 回程 + Y 步进 → 检查停止；数据排成 时间 × X × Y | 待写 `cscan_test.m`；Maria C_scan.py 作对照 | 未开始 | 10/13 计划建立 | — |
 | K7 | C-scan 测试 ①–⑥ 和检查手段（ctr1 计数、nEdge/tEdge、四角位置、MAP、重读、中途停止、拔线超时） | 07 第 3 周；docs/13 §4 | 未开始 | 10/13 计划建立 | — |
 | K8 | 每像素/每行用时 → 估算 3 mm × 3 mm 扫描时间 | Rui Phase 1 W4；中英对照第三部分 ① | 未开始 | 10/13 计划建立 | — |
@@ -39,7 +39,41 @@
 - 每日安排（建议，尚未执行）：第 1 天 K1–K4 讲解 + 白纸回忆，实验室确认 Y 接线（K5）；第 2 天 Y 标定 + `cscan_test.m` 检查模式（K5、K6）；第 3 天硬件 10 × 10 + 测试（K7、K8）；第 4 天剩余测试、文档、第 2 轮回忆。
 - 复习（建议，尚未执行）：每个知识点讲完当天回忆一次 → 第二天 → 3–4 天后（约 10/17）。
 - 卡点：暂无本周新证据。
-- 需 Rui 判断：暂无新增（10/12 组会记录在仓库里尚未找到，查找中）。
+- 需 Rui 判断：10/12 会议的要求和待办见 research-rui-1012。
+
+### research-rui-1012：10/12（周一）与 Rui 一对一会议
+- 来源：用户 10/12 上传的会议转录（无说话人标记，语音识别错误多）；用户 10/12 校正：程序名为 MATLAB/LabVIEW、DO 时钟 248 kS/s、一条 A-line 1024 点、「外方向」= Y 方向、「Doppler」= dual-port（指 Maria 用 dual-port 做）、Jennifer 负责切片和 H&E 染色。
+- 完整整理稿（按原对话顺序，含待办与手册核对结果）：claude.ai 文档「2026-10-12 与教授组会记录」https://claude.ai/code/artifact/c9b0725f-20da-4df0-9669-d8c70689acc5
+- 用户在会上汇报的结果（用户自述 + 此前实测，不是本次新测）：
+  - A-line 延迟：信号发生器设 1 µs 和 3 µs，测得差值约 1.97 µs（每个测 10–11 条）。
+  - B-scan：采到 400 条 A-line，叠图无明显延迟；4 mm/s、trigger 1000 Hz、1024 点 = 5.69 µs @ 180 MS/s；每 buffer 50 条 = 102400 字节；8 个 buffer 预先申请，运行约 3 s 卡住。
+  - 电机：电流设置 0.3（单位待确认），最高 4.8 mm/s，设 5 mm/s 时几乎不转；未设加减速。
+- Rui 明确要求 [导师要求]：
+  1. 知道采集卡阻抗在哪设，并在 MATLAB 程序里写成明确参数（现状不必改）。
+  2. 把 sampling frequency 和 bandwidth 的区别写下来；20 MHz 滤波开不开取决于信号范围（他估计信号约 10–35 MHz）。
+  3. 电机：逐个试电流、加速、减速；先算一个 B-scan 实际需要多快，4.8 mm/s 不一定是问题。
+  4. 采集：用 dual-port，一边采一边存（C-scan 可能采一小时，不可能全存在 DMA 里）；先自己理解 ring buffer 再试，不照搬 GPT。
+  5. 查 DAQ 手册里 record 的定义：一个 trigger = 一个 record；records per buffer 上限约 8000。
+  6. 采集方式：「一直走按 trigger 采」与「走停采」只是间隔不同，先按他画的那种做（具体是哪种：待确认）。
+  7. 切片：成像和 H&E 染色是两回事（先拿一片成像，再交 Jennifer 染色）；先写 workflow 给他看；回复 Jennifer；找多余载玻片，找不到就买。
+  8. 做实验前告诉他，他要来看（会上说明天或后天）。
+- 会上暴露的卡点（会后助手已讲解，用户尚未独立解释）：采样率 vs 带宽 vs 带宽限制；「10 ns」是 100 MS/s 的采样间隔而不是 A-line 长度；record / records per buffer / buffer 的定义与由谁决定；ring buffer 怎么实现；DO 时钟的用途；phase → 延时的换算说不清；切片 workflow 没想好。
+- 10/13 助手对照 ATS9462 手册核对 [文件确认；前提：卡是 ATS9462，型号待确认]：
+  - TRIG IN：输入阻抗固定 1.01 MΩ，量程 ±1 V / ±5 V，带宽 DC–25 MHz。可选 50 Ω / 1 MΩ 的是 CH A/B（AlazarInputControl）。
+  - CH A/B 带宽 DC–65 MHz（±4 V 量程为 50 MHz）；带宽限制约 20 MHz，SDK 文档称默认关（AlazarSetBWLimit）。
+  - RecordsPerBuffer 1–8191；「512」是 Traditional 模式下未传到电脑的 buffer 超过 512 时报 BUFFER_OVERFLOW，不是可申请上限；手册推荐成像用 NPT AutoDMA。
+  - dual-port AutoDMA 即手册推荐模式：等 buffer 满 → 处理/存盘 → AlazarPostAsyncBuffer 交回 → 等下一个；建议 ≥ 3 个 buffer。
+  - record 长度 ≥ 256 点且为 32 的倍数（1024 符合）。
+- 冲突（待确认）：research-cscan-week K3 写「TRIG IN 50 Ω」，手册为固定 1.01 MΩ。可能原因（推测）：三通把 CH A 的 50 Ω 负载并入，万用表量到的是 CH A。核实：查程序里 AlazarInputControl / AlazarSetExternalTrigger 的参数，断开三通分别量。
+- 条件计算：phase 324° 与 252° 若信号发生器为 100 kHz（周期 10 µs），对应 1 µs 与 3 µs，差 2 µs，与实测 1.97 µs 吻合 [条件计算，前提 频率 = 100 kHz，待确认]。
+- 待确认：采集卡型号（AlazarGetBoardKind）；程序里 CH A 阻抗/量程/耦合、TRIG IN 量程与阈值代码、带宽限制开关、AutoDMA 模式与是否重新 Post；卡住时的错误代码；信号发生器输出模式（50 Ω / High-Z）与延时测试频率；换能器中心频率与带宽；SR2 细分、额定电流、「0.3」单位、丝杠导程；「这一方向」是否为 Z；Jennifer 的切片厚度与交接方式；Rui 指定的是哪种采集方式。
+- 下一步（会上定的待办，尚未执行）：
+  - 采集卡：在程序里找到并写明阻抗设置；写下采样率/带宽区别；查换能器带宽 → 定每条 A-line 点数。
+  - 电机：查手册标称速度；逐个试电流/加减速；算 B-scan 所需速度；检查 Y 方向。
+  - 程序：查 record 定义与 records per buffer；先弄懂 AutoDMA 与 ring buffer；问 Maria 她的 dual-port 怎么设；改成一边采一边传，解决约 3 s 卡住；本周争取写完 C-scan 代码。
+  - 切片：写 workflow 给 Rui；回复 Jennifer；问切片厚度；找载玻片或买。
+  - 实验：定时间并提前告诉 Rui。
+- 证据状态：会议内容为转录整理；概念为助手讲解与手册核对，用户尚未做白纸回忆或独立解释。
 
 
 ### research-bscan-report：10/12 向 Rui 汇报 B-scan（测试信号版）
@@ -97,6 +131,7 @@
 
 ## 下一步
 
+- research-rui-1012：先核对冲突（TRIG IN 阻抗、卡型号），再按该主题的待办推进；写切片 workflow 给 Rui。
 - research-cscan-week：K1–K4 讲解 + 当天白纸回忆；实验室确认 Y 轴接线（K5）。
 - course-ebme615-bc-talk：第 2 步 BC 模型自测，然后按 7 步链继续。
 - research-bscan-report：见该主题"下一步"。

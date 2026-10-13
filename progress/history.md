@@ -48,3 +48,9 @@
 - 新主题 research-cscan-week：本周完成 C-scan（函数发生器测试信号，真实 PA 先不做；采集卡可用 dual-port）并熟悉全部代码。用户同意使用技能，并要求按知识点逐日记录进度。
 - 建立 K1–K8 知识点表（bscan_test 流程、时序表、触发链、ATS DMA/dual-port、Y 轴、C-scan 结构、C-scan 测试、像素时间）；K2/K3/K4 带入 10/11 research-bscan-report 的已有证据。
 - 证据状态：本周尚无用户独立解释；每日安排和复习时间为建议，尚未执行。
+
+## 2026-10-13 · 2026-10-13-rui-meeting-1012
+- 新主题 research-rui-1012：整理 10/12（周一）与 Rui 一对一会议。来源为用户上传的会议转录，用户 10/12 校正了程序名、DO 时钟 248 kS/s、A-line 1024 点、Y 方向、「Doppler」= dual-port（Maria）等术语。完整整理稿在 claude.ai 文档「2026-10-12 与教授组会记录」。
+- 记录 Rui 的 8 条明确要求（阻抗设置写进程序、采样率/带宽写清楚、电机逐项试并先算所需速度、dual-port 一边采一边存、查 record 定义、采集方式按他画的做、切片先写 workflow 并回复 Jennifer、做实验前通知他）和会议待办。
+- 助手 10/13 对照 ATS9462 手册核对：TRIG IN 固定 1.01 MΩ（与 research-cscan-week K3「TRIG IN 50 Ω」冲突，标待确认）；RecordsPerBuffer 1–8191；512 是 Traditional 模式溢出条件；dual-port AutoDMA 需处理完重新 Post buffer（推测为卡住原因）。research-cscan-week K3/K4/K5 每日进度同步追加。
+- 证据状态：会议内容为转录整理；概念为助手讲解，用户尚未独立解释或白纸回忆。
