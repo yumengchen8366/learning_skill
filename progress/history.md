@@ -66,3 +66,6 @@
 ## 2026-10-13 · 2026-10-13-rui-meeting-1012c
 - research-rui-1012：会议整理稿和原始转录已存入 Research-PAM 仓库 `02_笔记与上下文/会谈记录/`。
 - 更正：原判断（助手按 ATS9462 规格书 v1.5P：TRIG IN 固定 1.01 MΩ，与 K3「50 Ω」冲突）→ 修正（TRIG IN 是 50 Ω）→ 依据：bscan_test.m 第 262 行 ETR_5V = ETR_5V_50OHM（AlazarDefs.m 第 524/527 行）、10/9 万用表 50.2 Ω。用户 10/13「阻抗由 SDK 代码设置」的判断正确。「进实验室确认阻抗」待办改为「看懂 bscan_test.m 第 260–262 行」。
+
+## 2026-10-13 · 2026-10-13-pam-move
+- 按用户要求，PAM 主题（research-cscan-week、research-rui-1012、research-bscan-report）从 current.md 移到 Research-PAM 仓库 `02_笔记与上下文/PAM学习进度.md`（含对应历史条目的副本）；current.md 只留链接。以后 PAM 进度只在那里更新。本文件以往的历史条目保留不删。
