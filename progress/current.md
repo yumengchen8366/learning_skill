@@ -1,7 +1,7 @@
 # Yumeng 学习与科研进度
 
 最近更新：2026-10-13（America/New_York）
-更新标识：2026-10-13-rui-meeting-1012
+更新标识：2026-10-13-rui-meeting-1012b
 最近活动主题：research-rui-1012（10/12 与 Rui 一对一会议记录、要求与待办）；research-cscan-week（10/13 这周完成 C-scan 测试，按知识点逐日记录）；course-ebme615-bc-talk、research-bscan-report 保留
 
 ## 已明确的需求与偏好
@@ -65,10 +65,12 @@
   - dual-port AutoDMA 即手册推荐模式：等 buffer 满 → 处理/存盘 → AlazarPostAsyncBuffer 交回 → 等下一个；建议 ≥ 3 个 buffer。
   - record 长度 ≥ 256 点且为 32 的倍数（1024 符合）。
 - 冲突（待确认）：research-cscan-week K3 写「TRIG IN 50 Ω」，手册为固定 1.01 MΩ。可能原因（推测）：三通把 CH A 的 50 Ω 负载并入，万用表量到的是 CH A。核实：查程序里 AlazarInputControl / AlazarSetExternalTrigger 的参数，断开三通分别量。
+  - 用户 10/13 判断：阻抗应是在 SDK 代码里设置的（用户判断，未核对代码）。决定进实验室时作为待办确认。
 - 条件计算：phase 324° 与 252° 若信号发生器为 100 kHz（周期 10 µs），对应 1 µs 与 3 µs，差 2 µs，与实测 1.97 µs 吻合 [条件计算，前提 频率 = 100 kHz，待确认]。
 - 待确认：采集卡型号（AlazarGetBoardKind）；程序里 CH A 阻抗/量程/耦合、TRIG IN 量程与阈值代码、带宽限制开关、AutoDMA 模式与是否重新 Post；卡住时的错误代码；信号发生器输出模式（50 Ω / High-Z）与延时测试频率；换能器中心频率与带宽；SR2 细分、额定电流、「0.3」单位、丝杠导程；「这一方向」是否为 Z；Jennifer 的切片厚度与交接方式；Rui 指定的是哪种采集方式。
 - 下一步（会上定的待办，尚未执行）：
-  - 采集卡：在程序里找到并写明阻抗设置；写下采样率/带宽区别；查换能器带宽 → 定每条 A-line 点数。
+  - 【进实验室时确认，用户 10/13 选定】在 MATLAB 程序的 SDK 调用里找到阻抗设置：CH A 看 AlazarInputControl 的阻抗参数（50 Ω / 1 MΩ），TRIG IN 看 AlazarSetExternalTrigger 的量程和耦合；记下实际值，再决定 K3「TRIG IN 50 Ω」怎么改。完成标准：写下这两个函数的参数值和所在代码行。
+  - 采集卡：把阻抗写成程序里明确的参数；写下采样率/带宽区别；查换能器带宽 → 定每条 A-line 点数。
   - 电机：查手册标称速度；逐个试电流/加减速；算 B-scan 所需速度；检查 Y 方向。
   - 程序：查 record 定义与 records per buffer；先弄懂 AutoDMA 与 ring buffer；问 Maria 她的 dual-port 怎么设；改成一边采一边传，解决约 3 s 卡住；本周争取写完 C-scan 代码。
   - 切片：写 workflow 给 Rui；回复 Jennifer；问切片厚度；找载玻片或买。
@@ -131,7 +133,7 @@
 
 ## 下一步
 
-- research-rui-1012：先核对冲突（TRIG IN 阻抗、卡型号），再按该主题的待办推进；写切片 workflow 给 Rui。
+- research-rui-1012：进实验室时先在 SDK 代码里确认阻抗设置（TRIG IN / CH A）和卡型号，再按该主题的待办推进；写切片 workflow 给 Rui。
 - research-cscan-week：K1–K4 讲解 + 当天白纸回忆；实验室确认 Y 轴接线（K5）。
 - course-ebme615-bc-talk：第 2 步 BC 模型自测，然后按 7 步链继续。
 - research-bscan-report：见该主题"下一步"。

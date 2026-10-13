@@ -54,3 +54,6 @@
 - 记录 Rui 的 8 条明确要求（阻抗设置写进程序、采样率/带宽写清楚、电机逐项试并先算所需速度、dual-port 一边采一边存、查 record 定义、采集方式按他画的做、切片先写 workflow 并回复 Jennifer、做实验前通知他）和会议待办。
 - 助手 10/13 对照 ATS9462 手册核对：TRIG IN 固定 1.01 MΩ（与 research-cscan-week K3「TRIG IN 50 Ω」冲突，标待确认）；RecordsPerBuffer 1–8191；512 是 Traditional 模式溢出条件；dual-port AutoDMA 需处理完重新 Post buffer（推测为卡住原因）。research-cscan-week K3/K4/K5 每日进度同步追加。
 - 证据状态：会议内容为转录整理；概念为助手讲解，用户尚未独立解释或白纸回忆。
+
+## 2026-10-13 · 2026-10-13-rui-meeting-1012b
+- research-rui-1012：针对 TRIG IN 阻抗冲突，用户判断阻抗是在 SDK 代码里设置的（未核对代码），选定进实验室时确认：查 AlazarInputControl（CH A）和 AlazarSetExternalTrigger（TRIG IN）的实际参数和代码行。已加入该主题待办，冲突仍为待确认。
