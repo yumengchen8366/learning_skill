@@ -1,7 +1,7 @@
 # Yumeng 学习与科研进度
 
 最近更新：2026-10-21（America/New_York）
-更新标识：2026-10-21-ebme434-exam2-setup
+更新标识：2026-10-21-ebme434-diag01
 最近活动主题：course-ebme434-exam2（新建）；course-ebme615-bc-talk 保留；PAM 主题在 Research-PAM（见下）
 
 ## 已明确的需求与偏好
@@ -58,11 +58,13 @@
 - 用户决定（2026-10-11）：PPT notes 两版讲稿并存、自行选读；第 6/10/14 页图注越界稍后自己改。
 - 下一步（建议，尚未执行）：按助手针对 Q1/Q2/Q3/Q5/Q6/Q9/Q10 的讲解，明早用中文各复述一句；上台前把 C-01、C-02、DMN 大小三句英文念熟。
 
-### course-ebme434-exam2：EBME 434 (modeling) Exam 2 备考（11/4）
-- Exam 1 (9/30) 成绩 66/100（用户自述，考卷未提供，弱点未知——**不推断**）。Exam 2 范围（周次推断）：PDE 扩散/PDE 解法/Cable theory 1–2/HH model；deconvolution 待确认。地基补漏优先级：非线性 ODE+稳定性分析（HH 的直接前置）。
-- 计划：11/1 上午全真 mock → 11/2 错题修复 → 11/3 轻过+早睡 → 11/4 考试（课堂时段）。
-- 细节见 `progress/courses/EBME434/exam2/`（course-profile.md + learning-record.md）。
-- 等待用户：①Exam 1 考卷/错题 ②题型与可带公式页确认 ③deconvolution 是否在范围。
+### course-ebme434-exam2：EBME 434 (modeling) Exam 2 备考（11/4）+ Exam 1 口试（10/26 周）
+- Exam 1 = 66/100（Canvas 确认；班 mean 73.8 / median 80.5 / 20 人）。用户自述主因"没做完"（HW1、HW2 均 100）→ 疑为速度/熟练度问题，待看卷验证。<70 必须口试（30 min 白板，可拿回丢分 1/3）；**用户尚未预约口试和看卷**。
+- 评分：HW 25 / 三次考试 60 / critique 10 / participation 5；syllabus 无 curve、无 drop lowest。用户目标：底线 B；Exam 2 争取 90+。
+- 实际授课与 syllabus 不同：**LS/MLE 没讲**；9/23 数值方法+stiffness，9/28 起 PDE。Exam 2 已讲材料（讲义已全部读过）：扩散推导/IC-BC/单位 → 皮肤贴片 → 径向/Krogh → 特征尺度+无量纲 → MoL → Nernst/GHK/等效电路；待补 10/21 cable 2、HH、deconvolution（unconfirmed）。
+- 2026-10-21 交付 **Diagnostic 01**（10 题 60 min 答题页 + 分开的 key），用户尚未作答。
+- 细节见 `progress/courses/EBME434/exam2/`（course-profile.md / learning-record.md / practice/）。
+- 等待用户：①Diagnostic 01 导出 ②口试/看卷预约 ③每天可投入时间 ④9/23 后为何无个人笔记。
 
 ## 当前起点（历史）
 
@@ -72,3 +74,4 @@
 
 - PAM 主题（research-*）：见 Research-PAM `02_笔记与上下文/PAM学习进度.md`。
 - course-ebme615-bc-talk：第 2 步 BC 模型自测，然后按 7 步链继续。
+- course-ebme434-exam2：批改 Diagnostic 01 → 建概念表 → 14 天计划（口试+扩散线 / 膜+HH / 限时练+mock）。

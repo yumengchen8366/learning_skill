@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EBME 434 Diagnostic 01</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#666; --line:#ddd; --accent:#1f4e79; --warn:#b00020; --ok:#1b7f3b; --bg:#fff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font: 16px/1.55 Georgia, "Times New Roman", serif; }
+  .wrap { display:grid; grid-template-columns: 220px 1fr; min-height:100vh; }
+  nav { position:sticky; top:0; height:100vh; overflow:auto; border-right:1px solid var(--line); padding:16px; font-family: system-ui, -apple-system, sans-serif; font-size:14px; }
+  nav h2 { font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+  nav ol { list-style:none; margin:0 0 16px; padding:0; }
+  nav li a { display:flex; justify-content:space-between; padding:6px 8px; border-radius:6px; color:var(--ink); text-decoration:none; }
+  nav li a:hover { background:#f3f5f8; }
+  nav li a .st { font-size:11px; color:var(--muted); }
+  nav li a.done .st { color:var(--ok); }
+  main { max-width: 820px; padding: 32px 24px 120px; margin:0 auto; }
+  h1 { font-size:26px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-family: system-ui, sans-serif; font-size:14px; margin-bottom:20px; }
+  .instr { border:1px solid var(--line); border-left:4px solid var(--accent); padding:12px 16px; margin:0 0 28px; font-family: system-ui, sans-serif; font-size:14px; }
+  .instr ul { margin:6px 0 0 18px; padding:0; }
+  .timer { display:flex; gap:12px; align-items:center; font-family: system-ui, sans-serif; margin: 0 0 24px; }
+  .timer .t { font-size:28px; font-variant-numeric: tabular-nums; min-width:110px; }
+  .timer.over .t { color:var(--warn); }
+  button { font: 14px system-ui, sans-serif; padding:7px 12px; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:6px; cursor:pointer; }
+  button.ghost { background:#fff; color:var(--accent); }
+  section.q { border-top:1px solid var(--line); padding:28px 0 8px; }
+  section.q h3 { margin:0 0 4px; font-size:19px; }
+  .meta { font-family: system-ui, sans-serif; font-size:13px; color:var(--muted); margin-bottom:12px; }
+  .stem p { margin:8px 0; }
+  .eq { display:block; margin:10px 0 10px 24px; font-size:17px; }
+  ol.parts { padding-left:22px; } ol.parts li { margin:6px 0; }
+  textarea { width:100%; min-height:150px; font: 15px/1.5 "Menlo", "Consolas", monospace; padding:10px; border:1px solid #bbb; border-radius:6px; resize:vertical; }
+  textarea:focus { outline:2px solid var(--accent); border-color:transparent; }
+  .ans-label { font-family: system-ui, sans-serif; font-size:13px; color:var(--muted); margin:14px 0 6px; }
+  .flags { font-family: system-ui, sans-serif; font-size:13px; margin:6px 0 0; display:flex; gap:16px; flex-wrap:wrap; }
+  .flags label { cursor:pointer; }
+  .toolbar { display:flex; gap:10px; flex-wrap:wrap; margin-top:32px; font-family: system-ui, sans-serif; }
+  .note { font-family: system-ui, sans-serif; font-size:13px; color:var(--muted); }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } nav { position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); } }
+  @media print { nav, .timer, .toolbar, button { display:none !important; } main { max-width:100%; padding:0; } textarea { border:1px solid #999; min-height:220px; } section.q { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <h2>Questions</h2>
+  <ol id="navlist"></ol>
+  <div class="note" id="progress">0 / 10 answered</div>
+  <p class="note" style="margin-top:12px">自动保存在这个浏览器里；做完点底部 Export。</p>
+</nav>
+<main>
+  <h1>EBME 434 · Diagnostic 01</h1>
+  <div class="sub">Exam 1 material (weeks 1–6, as actually taught) + Exam 2 material through Oct 14 · 10 questions · 100 points · 60 minutes</div>
+
+  <div class="instr">
+    <strong>做题规则（这是诊断，不是考试，但要像考试一样做）</strong>
+    <ul>
+      <li>合上所有笔记。60 分钟到了就停，没做完的题留空——<b>没做完本身就是我要的数据</b>。</li>
+      <li>在纸上推导，然后把<b>最终答案 + 关键步骤</b>打进每题下面的框里（公式用普通文字写就行，例如 <code>dC/dt = -k*C</code>）。也可以在框里写「见纸上第 2 页」然后拍照发我。</li>
+      <li>每题下面有两个勾选：<b>没做完</b>（时间不够）和<b>不确定</b>（做了但没底）。请如实勾。</li>
+      <li>做完点最底下的 <b>Export</b>，把导出的文件发给我批改。答案在另一个文件里，批改前别看。</li>
+      <li>每题标注的分钟数是建议节奏，总和略超 60 分钟，故意的。</li>
+    </ul>
+  </div>
+
+  <div class="timer" id="timer">
+    <div class="t" id="clock">60:00</div>
+    <button id="startBtn">Start 60 min</button>
+    <button class="ghost" id="resetBtn">Reset timer</button>
+    <span class="note" id="timerNote">点 Start 开始计时；到 0 会变红但不会锁定页面。</span>
+  </div>
+
+  <!-- ============ Q1 ============ -->
+  <section class="q" id="q1">
+    <h3>1. Constant-rate infusion, one compartment</h3>
+    <div class="meta">10 points · ~7 min · units · single-compartment model · nondimensionalization</div>
+    <div class="stem">
+      <p>An antibiotic is given by continuous IV infusion at a constant rate <i>R</i> = 120 mg/hr into a single well-mixed compartment of volume <i>V</i> = 40 L. Elimination is first order with rate constant <i>k</i> = 0.25 hr<sup>−1</sup>. There is no drug in the body at <i>t</i> = 0.</p>
+      <ol class="parts" type="a">
+        <li>Write the mass-balance ODE for the concentration <i>C</i>(<i>t</i>) (mg/L), with its initial condition. State the units of <b>every term</b> in the equation and show they agree.</li>
+        <li>Solve the ODE for <i>C</i>(<i>t</i>).</li>
+        <li>What is the steady-state concentration <i>C</i><sub>ss</sub>? How long does it take to reach 95% of <i>C</i><sub>ss</sub>? Express that time both in hours and as a multiple of the time constant.</li>
+        <li>Nondimensionalize the equation using <i>τ</i> = <i>kt</i> and <i>θ</i> = <i>C</i>/<i>C</i><sub>ss</sub>. Write the resulting equation and explain in one sentence why this is the "natural" choice of scales.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="1" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="1" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="1" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q2 ============ -->
+  <section class="q" id="q2">
+    <h3>2. Two-compartment kinetics: time scales</h3>
+    <div class="meta">10 points · ~8 min · eigenvalues · fast/slow phases</div>
+    <div class="stem">
+      <p>A drug distributes between a central compartment (1) and a peripheral compartment (2). Using amounts <i>A</i><sub>1</sub>, <i>A</i><sub>2</sub> (mg), the model is</p>
+      <span class="eq">d<i>A</i><sub>1</sub>/d<i>t</i> = −(<i>k</i><sub>12</sub> + <i>k</i><sub>e</sub>)<i>A</i><sub>1</sub> + <i>k</i><sub>21</sub><i>A</i><sub>2</sub></span>
+      <span class="eq">d<i>A</i><sub>2</sub>/d<i>t</i> = <i>k</i><sub>12</sub><i>A</i><sub>1</sub> − <i>k</i><sub>21</sub><i>A</i><sub>2</sub></span>
+      <p>with <i>k</i><sub>12</sub> = 0.3 hr<sup>−1</sup>, <i>k</i><sub>21</sub> = 0.1 hr<sup>−1</sup>, <i>k</i><sub>e</sub> = 0.2 hr<sup>−1</sup>, and a bolus <i>A</i><sub>1</sub>(0) = 500 mg, <i>A</i><sub>2</sub>(0) = 0.</p>
+      <ol class="parts" type="a">
+        <li>Write the system as d<b>A</b>/d<i>t</i> = <b>M A</b> and give the matrix <b>M</b> with numbers.</li>
+        <li>Find the two eigenvalues (show the characteristic equation; 3 significant figures is fine).</li>
+        <li>Give the fast and slow time constants in hours. Which eigenvalue governs the terminal (late-time) decay of a semi-log plot of <i>A</i><sub>1</sub>(<i>t</i>)?</li>
+        <li>Sketch (describe in words if typing) what ln <i>A</i><sub>1</sub> vs <i>t</i> looks like, and explain in one sentence why the two-compartment model is "stiffer" than a one-compartment model with <i>k</i> = 0.2 hr<sup>−1</sup>.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="2" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="2" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="2" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q3 ============ -->
+  <section class="q" id="q3">
+    <h3>3. Saturable metabolism</h3>
+    <div class="meta">8 points · ~5 min · Michaelis–Menten · limiting regimes · identifiability</div>
+    <div class="stem">
+      <p>A drug is cleared by a hepatic enzyme with <i>V</i><sub>max</sub> = 10 μM/s and <i>K</i><sub>m</sub> = 50 μM.</p>
+      <ol class="parts" type="a">
+        <li>Compute the elimination rate <i>v</i> at substrate concentrations <i>s</i> = 5, 50, and 500 μM.</li>
+        <li>For each of the three values, say which regime it is in (first-order, half-saturated, zeroth-order) and <b>what a first-order model with</b> <i>k</i> = <i>V</i><sub>max</sub>/<i>K</i><sub>m</sub> <b>would have predicted instead</b>.</li>
+        <li>The full mechanism has rate constants <i>k</i><sub>1</sub>, <i>k</i><sub>−1</sub>, <i>k</i><sub>2</sub>. A colleague measures <i>v</i> vs <i>s</i> very precisely and claims she can therefore determine all three. Is that right? Explain in two sentences, and state the condition (small parameter) under which the QSSA that produced the MM equation is valid.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="3" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="3" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="3" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q4 ============ -->
+  <section class="q" id="q4">
+    <h3>4. Two competing cell populations</h3>
+    <div class="meta">12 points · ~10 min · fixed points · Jacobian · classification · feedback</div>
+    <div class="stem">
+      <p>Two cell populations <i>x</i> and <i>y</i> (dimensionless densities) compete for the same nutrient:</p>
+      <span class="eq">d<i>x</i>/d<i>t</i> = <i>x</i>(3 − <i>x</i> − 2<i>y</i>)</span>
+      <span class="eq">d<i>y</i>/d<i>t</i> = <i>y</i>(2 − <i>x</i> − <i>y</i>)</span>
+      <ol class="parts" type="a">
+        <li>Find <b>all</b> fixed points.</li>
+        <li>Write the Jacobian in general form.</li>
+        <li>Classify the stability of <b>each</b> fixed point (node/saddle/spiral, stable/unstable) using tr and det, or the eigenvalues.</li>
+        <li>In one or two sentences: what does the long-term outcome depend on, and what is the biological name for this behaviour?</li>
+        <li>Is the effect of <i>y</i> on <i>x</i> a positive or negative feedback? Is the effect of <i>x</i> on itself (at small <i>x</i>) positive or negative? One phrase each.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="4" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="4" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="4" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q5 ============ -->
+  <section class="q" id="q5">
+    <h3>5. Numerical solvers and stiffness</h3>
+    <div class="meta">8 points · ~5 min · Forward Euler · stability bound · stiffness</div>
+    <div class="stem">
+      <ol class="parts" type="a">
+        <li>For d<i>C</i>/d<i>t</i> = −<i>kC</i> with <i>k</i> = 2 hr<sup>−1</sup> and <i>C</i>(0) = 8 mg/L, take <b>one</b> Forward Euler step with Δ<i>t</i> = 0.25 hr. Compare to the exact value at <i>t</i> = 0.25 hr.</li>
+        <li>What is the largest Δ<i>t</i> for which Forward Euler stays numerically stable for this equation? What happens to the numerical solution if Δ<i>t</i> = 1.5 hr?</li>
+        <li>A reaction model has two time constants, 1 ms and 10 s, and must be simulated for 10 s. Explain why this is a <i>stiff</i> problem, estimate how many Forward Euler steps are needed, and name the kind of method (and a MATLAB solver) you would use instead and <b>why</b> it can take larger steps.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="5" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="5" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="5" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q6 ============ -->
+  <section class="q" id="q6">
+    <h3>6. Setting up a diffusion–reaction model</h3>
+    <div class="meta">10 points · ~7 min · control volume · Fick's law · IC/BC · units</div>
+    <div class="stem">
+      <p>A flat hydrogel scaffold of thickness <i>L</i> is seeded uniformly with cells. Its left face (<i>x</i> = 0) sits in culture medium that holds the glucose concentration fixed at <i>C</i><sub>0</sub>. Its right face (<i>x</i> = <i>L</i>) is bonded to an impermeable plate. The cells consume glucose at a rate proportional to the local glucose concentration (rate constant <i>k</i>). At <i>t</i> = 0 the scaffold contains no glucose.</p>
+      <ol class="parts" type="a">
+        <li>Starting from a mass balance on a control volume of thickness Δ<i>x</i> and area <i>A</i>, and Fick's law <i>J</i> = −<i>D</i> ∂<i>C</i>/∂<i>x</i>, derive the governing PDE for <i>C</i>(<i>x</i>, <i>t</i>). (Short derivation — show the limit Δ<i>x</i> → 0.)</li>
+        <li>Write the initial condition and both boundary conditions. Name the type of each boundary condition.</li>
+        <li>If [<i>C</i>] = mol/m<sup>3</sup>, [<i>x</i>] = m, [<i>t</i>] = s: give the units of <i>D</i>, <i>J</i>, and <i>k</i>, and check that all terms in your PDE have the same units.</li>
+        <li>Suppose instead the right face were in contact with a second, <b>well-stirred</b> bath in which glucose is carried away with a mass-transfer coefficient <i>k</i><sub>c</sub> (m/s) and far-field concentration 0. Write the new boundary condition at <i>x</i> = <i>L</i> and name its type.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="6" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="6" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="6" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q7 ============ -->
+  <section class="q" id="q7">
+    <h3>7. Characteristic scales and the dimensionless group</h3>
+    <div class="meta">12 points · ~7 min · diffusion time · diffusion length · nondimensionalization</div>
+    <div class="stem">
+      <p>A growth factor with diffusivity <i>D</i> = 2 × 10<sup>−10</sup> m<sup>2</sup>/s must cross a tissue layer <i>L</i> = 1 mm thick.</p>
+      <ol class="parts" type="a">
+        <li>Compute the diffusion time <i>t</i><sub>diff</sub> in seconds and minutes.</li>
+        <li>Compute the dimensionless time <i>τ</i> at <i>t</i> = 10 min. In one sentence, what does this value tell you about the concentration profile at that moment?</li>
+        <li>How far has the growth factor diffused after 1 hour? (Give the diffusion length in mm.)</li>
+        <li>The tissue also degrades the growth factor with first-order rate <i>k</i> = 1 × 10<sup>−4</sup> s<sup>−1</sup>, so the model is ∂<i>C</i>/∂<i>t</i> = <i>D</i> ∂<sup>2</sup><i>C</i>/∂<i>x</i><sup>2</sup> − <i>kC</i>. Nondimensionalize with <i>ψ</i> = <i>C</i>/<i>C</i><sub>0</sub>, <i>ξ</i> = <i>x</i>/<i>L</i>, <i>τ</i> = <i>Dt</i>/<i>L</i><sup>2</sup>. Write the dimensionless PDE, identify the dimensionless group that appears, compute its value here, and say in one sentence what it means physically. Does the "same solution for all drugs in all tissues" claim still hold for this equation?</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="7" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="7" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="7" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q8 ============ -->
+  <section class="q" id="q8">
+    <h3>8. Steady-state oxygen in a tissue slab</h3>
+    <div class="meta">12 points · ~7 min · steady-state diffusion–reaction · integrate twice · apply BCs</div>
+    <div class="stem">
+      <p>A slab of engineered tissue of thickness <i>L</i> receives oxygen only through its face at <i>x</i> = 0, where the concentration is held at <i>C</i><sub>0</sub>. The face at <i>x</i> = <i>L</i> is sealed (no flux). Cells consume oxygen at a constant (zero-order) rate <i>Q</i> per unit volume. Assume steady state.</p>
+      <ol class="parts" type="a">
+        <li>Write the steady-state ODE for <i>C</i>(<i>x</i>) with its two boundary conditions.</li>
+        <li>Integrate twice to find <i>C</i>(<i>x</i>). Use one boundary condition after each integration.</li>
+        <li>Where is the oxygen concentration lowest, and what is its value <i>C</i><sub>min</sub> in terms of <i>C</i><sub>0</sub>, <i>Q</i>, <i>L</i>, <i>D</i>?</li>
+        <li>With <i>C</i><sub>0</sub> = 0.2 mol/m<sup>3</sup>, <i>Q</i> = 2 × 10<sup>−3</sup> mol/(m<sup>3</sup>·s), <i>D</i> = 2 × 10<sup>−9</sup> m<sup>2</sup>/s, <i>L</i> = 0.2 mm: compute <i>C</i><sub>min</sub>. Then find the <b>largest</b> thickness <i>L</i><sub>crit</sub> for which no part of the slab becomes anoxic (<i>C</i> ≥ 0 everywhere).</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="8" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="8" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="8" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q9 ============ -->
+  <section class="q" id="q9">
+    <h3>9. Method of lines</h3>
+    <div class="meta">10 points · ~7 min · finite differences · boundary handling · link to stiffness</div>
+    <div class="stem">
+      <p>Consider ∂<i>C</i>/∂<i>t</i> = <i>D</i> ∂<sup>2</sup><i>C</i>/∂<i>x</i><sup>2</sup> − <i>kC</i> on 0 &lt; <i>x</i> &lt; <i>L</i>, with <i>C</i>(0, <i>t</i>) = <i>B</i>, ∂<i>C</i>/∂<i>x</i>(<i>L</i>, <i>t</i>) = 0, and <i>C</i>(<i>x</i>, 0) = 0. Discretize the spatial domain with <i>N</i> = 5 <b>interior</b> nodes <i>x</i><sub>1</sub>, …, <i>x</i><sub>5</sub> plus the boundary nodes <i>x</i><sub>0</sub> = 0 and <i>x</i><sub>6</sub> = <i>L</i>.</p>
+      <ol class="parts" type="a">
+        <li>What is the grid spacing <i>h</i> if <i>L</i> = 3 mm? Write the second-order central-difference approximation for ∂<sup>2</sup><i>C</i>/∂<i>x</i><sup>2</sup> at node <i>i</i>.</li>
+        <li>Write the ODE for a generic interior node <i>i</i> (2 ≤ <i>i</i> ≤ 4).</li>
+        <li>Write the ODE for node 1 and for node 5, showing explicitly how each boundary condition enters.</li>
+        <li>How many ODEs does the solver integrate, and what initial condition does each get?</li>
+        <li>If you halve <i>h</i> (double the number of nodes), roughly what happens to the stiffness of the resulting ODE system, and why? (Hint: think about the fastest time constant of a term like <i>D</i>(<i>C</i><sub>i+1</sub> − 2<i>C</i><sub>i</sub> + <i>C</i><sub>i−1</sub>)/<i>h</i><sup>2</sup>.)</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="9" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="9" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="9" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <!-- ============ Q10 ============ -->
+  <section class="q" id="q10">
+    <h3>10. Membrane potential</h3>
+    <div class="meta">8 points · ~6 min · Nernst · GHK (qualitative) · equivalent circuit</div>
+    <div class="stem">
+      <p>Use <i>R</i> = 8.314 J/(mol·K), <i>F</i> = 96,485 C/mol, <i>T</i> = 310 K. Concentrations (mM): [Na<sup>+</sup>]<sub>out</sub> = 145, [Na<sup>+</sup>]<sub>in</sub> = 12; [K<sup>+</sup>]<sub>out</sub> = 5, [K<sup>+</sup>]<sub>in</sub> = 140; [Cl<sup>−</sup>]<sub>out</sub> = 110, [Cl<sup>−</sup>]<sub>in</sub> = 10.</p>
+      <ol class="parts" type="a">
+        <li>Compute the Nernst potential for Na<sup>+</sup> and for Cl<sup>−</sup> (mV). Be careful with the sign of <i>z</i> for chloride. (You may use <i>E</i><sub>K</sub> ≈ −89 mV from class.)</li>
+        <li>Show that <i>RT</i>/(<i>zF</i>) has units of volts.</li>
+        <li>Without computing it: if the membrane's Na<sup>+</sup> permeability suddenly increased 10-fold while the others stayed fixed, which direction would the GHK resting potential move, and toward which value? One sentence.</li>
+        <li>Model the membrane as three parallel conductance–battery branches (<i>g</i><sub>K</sub> = 1.0, <i>g</i><sub>Na</sub> = 0.04, <i>g</i><sub>Cl</sub> = 0.45, arbitrary units) with a capacitor <i>C</i><sub>m</sub>. Write the ODE for <i>V</i><sub>m</sub>(<i>t</i>) with no injected current, and solve for the steady-state <i>V</i><sub>m</sub> using your Nernst values.</li>
+      </ol>
+    </div>
+    <div class="ans-label">Your answer</div>
+    <textarea data-q="10" placeholder="Final answers + key steps..."></textarea>
+    <div class="flags"><label><input type="checkbox" data-flag="10" data-kind="unfinished"> 没做完</label><label><input type="checkbox" data-flag="10" data-kind="unsure"> 不确定</label></div>
+  </section>
+
+  <div class="toolbar">
+    <button id="exportMd">Export as Markdown (.md)</button>
+    <button id="exportJson" class="ghost">Export as JSON</button>
+    <button id="printBtn" class="ghost">Print / Save PDF</button>
+    <button id="clearBtn" class="ghost">Clear all answers</button>
+  </div>
+  <p class="note">Export 会把每题的答案、勾选状态和用时一起导出。答案在 <code>diagnostic-01-key.md</code>，批改前不要打开。</p>
+</main>
+</div>
+
+<script>
+(function(){
+  var N = 10, KEY = 'ebme434-diag01';
+  var state = { answers:{}, flags:{}, startedAt:null, elapsed:0 };
+  function load(){ try { var s = localStorage.getItem(KEY); if (s) state = Object.assign(state, JSON.parse(s)); } catch(e){} }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+  load();
+
+  // nav
+  var nav = document.getElementById('navlist');
+  var titles = [];
+  for (var i=1;i<=N;i++){
+    var h = document.querySelector('#q'+i+' h3').textContent.replace(/^\d+\.\s*/,'');
+    titles.push(h);
+    var li = document.createElement('li');
+    li.innerHTML = '<a href="#q'+i+'" id="nav'+i+'"><span>'+i+'. '+h.slice(0,22)+(h.length>22?'…':'')+'</span><span class="st">—</span></a>';
+    nav.appendChild(li);
+  }
+  function refreshNav(){
+    var done = 0;
+    for (var i=1;i<=N;i++){
+      var a = document.getElementById('nav'+i);
+      var txt = (state.answers[i]||'').trim();
+      var f = state.flags[i]||{};
+      var st = txt ? (f.unfinished ? 'partial' : 'answered') : 'blank';
+      if (txt) done++;
+      a.className = txt && !f.unfinished ? 'done' : '';
+      a.querySelector('.st').textContent = st + (f.unsure ? ' ?' : '');
+    }
+    document.getElementById('progress').textContent = done+' / '+N+' answered';
+  }
+
+  // textareas + flags
+  var tas = document.querySelectorAll('textarea[data-q]');
+  Array.prototype.forEach.call(tas, function(ta){
+    var q = ta.getAttribute('data-q');
+    ta.value = state.answers[q] || '';
+    ta.addEventListener('input', function(){ state.answers[q] = ta.value; save(); refreshNav(); });
+  });
+  var cbs = document.querySelectorAll('input[data-flag]');
+  Array.prototype.forEach.call(cbs, function(cb){
+    var q = cb.getAttribute('data-flag'), kind = cb.getAttribute('data-kind');
+    state.flags[q] = state.flags[q] || {};
+    cb.checked = !!state.flags[q][kind];
+    cb.addEventListener('change', function(){ state.flags[q][kind] = cb.checked; save(); refreshNav(); });
+  });
+  refreshNav();
+
+  // timer
+  var TOTAL = 60*60, tick = null;
+  var clock = document.getElementById('clock'), timerBox = document.getElementById('timer');
+  function fmt(s){ var m=Math.floor(Math.abs(s)/60), r=Math.abs(s)%60; return (s<0?'−':'')+(m<10?'0':'')+m+':'+(r<10?'0':'')+r; }
+  function render(){
+    var el = state.elapsed + (state.startedAt ? Math.floor((Date.now()-state.startedAt)/1000) : 0);
+    var left = TOTAL - el;
+    clock.textContent = fmt(left);
+    timerBox.className = 'timer' + (left<0 ? ' over' : '');
+  }
+  function start(){ if (state.startedAt) return; state.startedAt = Date.now(); save(); tick = setInterval(render, 1000); render(); document.getElementById('startBtn').textContent='Running…'; }
+  document.getElementById('startBtn').addEventListener('click', start);
+  document.getElementById('resetBtn').addEventListener('click', function(){ if (tick) clearInterval(tick); tick=null; state.startedAt=null; state.elapsed=0; save(); render(); document.getElementById('startBtn').textContent='Start 60 min'; });
+  if (state.startedAt){ tick = setInterval(render,1000); document.getElementById('startBtn').textContent='Running…'; }
+  render();
+  function elapsedNow(){ return state.elapsed + (state.startedAt ? Math.floor((Date.now()-state.startedAt)/1000) : 0); }
+
+  // export
+  function dl(name, text, type){ var b = new Blob([text], {type:type}); var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+  function payload(){
+    var out = { test:'EBME434 Diagnostic 01', exportedAt:new Date().toISOString(), elapsedSeconds: elapsedNow(), questions:[] };
+    for (var i=1;i<=N;i++) out.questions.push({ n:i, title:titles[i-1], answer: state.answers[i]||'', unfinished: !!(state.flags[i]&&state.flags[i].unfinished), unsure: !!(state.flags[i]&&state.flags[i].unsure) });
+    return out;
+  }
+  document.getElementById('exportJson').addEventListener('click', function(){ dl('diagnostic-01-answers.json', JSON.stringify(payload(),null,2), 'application/json'); });
+  document.getElementById('exportMd').addEventListener('click', function(){
+    var p = payload(), md = '# EBME 434 Diagnostic 01 — answers\n\nExported: '+p.exportedAt+'  \nTime used: '+fmt(p.elapsedSeconds)+'\n\n';
+    p.questions.forEach(function(q){ md += '## Q'+q.n+'. '+q.title+'\n'+(q.unfinished?'**[没做完]** ':'')+(q.unsure?'**[不确定]** ':'')+'\n\n'+(q.answer.trim()||'_(blank)_')+'\n\n'; });
+    dl('diagnostic-01-answers.md', md, 'text/markdown');
+  });
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('clearBtn').addEventListener('click', function(){ if (!confirm('Clear all answers and the timer?')) return; state = {answers:{},flags:{},startedAt:null,elapsed:0}; save(); location.reload(); });
+})();
+</script>
+</body>
+</html>
