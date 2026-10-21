@@ -1,7 +1,7 @@
 # Yumeng 学习与科研进度
 
 最近更新：2026-10-21（America/New_York）
-更新标识：2026-10-21-ebme434-diag01
+更新标识：2026-10-21-ebme434-concept01
 最近活动主题：course-ebme434-exam2（新建）；course-ebme615-bc-talk 保留；PAM 主题在 Research-PAM（见下）
 
 ## 已明确的需求与偏好
@@ -62,7 +62,7 @@
 - Exam 1 = 66/100（Canvas 确认；班 mean 73.8 / median 80.5 / 20 人）。用户自述主因"没做完"（HW1、HW2 均 100）→ 疑为速度/熟练度问题，待看卷验证。<70 必须口试（30 min 白板，可拿回丢分 1/3）；**用户尚未预约口试和看卷**。
 - 评分：HW 25 / 三次考试 60 / critique 10 / participation 5；syllabus 无 curve、无 drop lowest。用户目标：底线 B；Exam 2 争取 90+。
 - 实际授课与 syllabus 不同：**LS/MLE 没讲**；9/23 数值方法+stiffness，9/28 起 PDE。Exam 2 已讲材料（讲义已全部读过）：扩散推导/IC-BC/单位 → 皮肤贴片 → 径向/Krogh → 特征尺度+无量纲 → MoL → Nernst/GHK/等效电路；待补 10/21 cable 2、HH、deconvolution（unconfirmed）。
-- 2026-10-21 交付 **Diagnostic 01**（10 题 60 min 答题页 + 分开的 key），用户尚未作答。
+- 2026-10-21 交付 **Diagnostic 01**（10 题 60 min 答题页 + 分开的 key），用户尚未作答。**Concept Check 01：5/12**——错题集中在特征值→行为链（3 题）和 9/23–9/28 无笔记内容（Euler/stiff/Neumann）；MM 极限也错。诊断修正为"速度 + 概念缺口并存"。正在按 ①→⑨ 逐块复习，从特征值链开始。
 - 细节见 `progress/courses/EBME434/exam2/`（course-profile.md / learning-record.md / practice/）。
 - 等待用户：①Diagnostic 01 导出 ②口试/看卷预约 ③每天可投入时间 ④9/23 后为何无个人笔记。
 
