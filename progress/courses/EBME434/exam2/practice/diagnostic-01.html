@@ -69,8 +69,9 @@
   <div class="timer" id="timer">
     <div class="t" id="clock">60:00</div>
     <button id="startBtn">Start 60 min</button>
+    <button class="ghost" id="pauseBtn" style="display:none">Pause</button>
     <button class="ghost" id="resetBtn">Reset timer</button>
-    <span class="note" id="timerNote">点 Start 开始计时；到 0 会变红但不会锁定页面。</span>
+    <span class="note" id="timerNote">点 Start 开始；有事可以 Pause，回来再 Resume。到 0 会变红但不会锁定页面。</span>
   </div>
 
   <!-- ============ Q1 ============ -->
@@ -325,11 +326,19 @@
     clock.textContent = fmt(left);
     timerBox.className = 'timer' + (left<0 ? ' over' : '');
   }
-  function start(){ if (state.startedAt) return; state.startedAt = Date.now(); save(); tick = setInterval(render, 1000); render(); document.getElementById('startBtn').textContent='Running…'; }
-  document.getElementById('startBtn').addEventListener('click', start);
-  document.getElementById('resetBtn').addEventListener('click', function(){ if (tick) clearInterval(tick); tick=null; state.startedAt=null; state.elapsed=0; save(); render(); document.getElementById('startBtn').textContent='Start 60 min'; });
-  if (state.startedAt){ tick = setInterval(render,1000); document.getElementById('startBtn').textContent='Running…'; }
-  render();
+  var startBtn=document.getElementById('startBtn'), pauseBtn=document.getElementById('pauseBtn');
+  function ui(){
+    if (state.startedAt){ startBtn.style.display='none'; pauseBtn.style.display=''; pauseBtn.textContent='Pause'; }
+    else if (state.elapsed>0){ startBtn.style.display=''; startBtn.textContent='Resume'; pauseBtn.style.display='none'; }
+    else { startBtn.style.display=''; startBtn.textContent='Start 60 min'; pauseBtn.style.display='none'; }
+  }
+  function start(){ if (state.startedAt) return; state.startedAt = Date.now(); save(); if (tick) clearInterval(tick); tick = setInterval(render, 1000); render(); ui(); }
+  function pause(){ if (!state.startedAt) return; state.elapsed += Math.floor((Date.now()-state.startedAt)/1000); state.startedAt=null; save(); if (tick) clearInterval(tick); tick=null; render(); ui(); }
+  startBtn.addEventListener('click', start);
+  pauseBtn.addEventListener('click', pause);
+  document.getElementById('resetBtn').addEventListener('click', function(){ if (tick) clearInterval(tick); tick=null; state.startedAt=null; state.elapsed=0; save(); render(); ui(); });
+  if (state.startedAt){ tick = setInterval(render,1000); }
+  render(); ui();
   function elapsedNow(){ return state.elapsed + (state.startedAt ? Math.floor((Date.now()-state.startedAt)/1000) : 0); }
 
   // export
