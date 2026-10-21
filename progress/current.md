@@ -1,8 +1,8 @@
 # Yumeng 学习与科研进度
 
-最近更新：2026-10-13（America/New_York）
-更新标识：2026-10-13-impedance-code-check
-最近活动主题：PAM 主题已搬到 Research-PAM（见下）；course-ebme615-bc-talk 保留
+最近更新：2026-10-21（America/New_York）
+更新标识：2026-10-21-ebme434-exam2-setup
+最近活动主题：course-ebme434-exam2（新建）；course-ebme615-bc-talk 保留；PAM 主题在 Research-PAM（见下）
 
 ## 已明确的需求与偏好
 
@@ -57,6 +57,12 @@
 - 卡点：C-01/C-02 的两句英文还没自己说出；5,709/26,796/491 三个数的层级；网络大小与占比的关系；K 表指标的计算；R̂ 与 BFDR 的含义；"significant" 与 "selected" 的用词。
 - 用户决定（2026-10-11）：PPT notes 两版讲稿并存、自行选读；第 6/10/14 页图注越界稍后自己改。
 - 下一步（建议，尚未执行）：按助手针对 Q1/Q2/Q3/Q5/Q6/Q9/Q10 的讲解，明早用中文各复述一句；上台前把 C-01、C-02、DMN 大小三句英文念熟。
+
+### course-ebme434-exam2：EBME 434 (modeling) Exam 2 备考（11/4）
+- Exam 1 (9/30) 成绩 66/100（用户自述，考卷未提供，弱点未知——**不推断**）。Exam 2 范围（周次推断）：PDE 扩散/PDE 解法/Cable theory 1–2/HH model；deconvolution 待确认。地基补漏优先级：非线性 ODE+稳定性分析（HH 的直接前置）。
+- 计划：11/1 上午全真 mock → 11/2 错题修复 → 11/3 轻过+早睡 → 11/4 考试（课堂时段）。
+- 细节见 `progress/courses/EBME434/exam2/`（course-profile.md + learning-record.md）。
+- 等待用户：①Exam 1 考卷/错题 ②题型与可带公式页确认 ③deconvolution 是否在范围。
 
 ## 当前起点（历史）
 

@@ -69,3 +69,6 @@
 
 ## 2026-10-13 · 2026-10-13-pam-move
 - 按用户要求，PAM 主题（research-cscan-week、research-rui-1012、research-bscan-report）从 current.md 移到 Research-PAM 仓库 `02_笔记与上下文/PAM学习进度.md`（含对应历史条目的副本）；current.md 只留链接。以后 PAM 进度只在那里更新。本文件以往的历史条目保留不删。
+
+## 2026-10-21
+- 复习：EBME434 exam2 建档。Exam 1 (9/30) = 66/100（用户自述）；Exam 2 (11/4) 范围表（周次推断：PDE/Cable/HH，deconvolution 待确认）；地基依赖链与补漏优先级写入 course-profile；弱点待考卷证据，未推断。计划：11/1 mock → 11/4 考试。
