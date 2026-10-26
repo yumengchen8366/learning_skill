@@ -1,7 +1,7 @@
 # Yumeng 学习与科研进度
 
-最近更新：2026-10-21（America/New_York）
-更新标识：2026-10-21-ebme434-concept01
+最近更新：2026-10-25（America/New_York）
+更新标识：2026-10-25-ebme434-oral01
 最近活动主题：course-ebme434-exam2（新建）；course-ebme615-bc-talk 保留；PAM 主题在 Research-PAM（见下）
 
 ## 已明确的需求与偏好
@@ -63,6 +63,7 @@
 - 评分：HW 25 / 三次考试 60 / critique 10 / participation 5；syllabus 无 curve、无 drop lowest。用户目标：底线 B；Exam 2 争取 90+。
 - 实际授课与 syllabus 不同：**LS/MLE 没讲**；9/23 数值方法+stiffness，9/28 起 PDE。Exam 2 已讲材料（讲义已全部读过）：扩散推导/IC-BC/单位 → 皮肤贴片 → 径向/Krogh → 特征尺度+无量纲 → MoL → Nernst/GHK/等效电路；待补 10/21 cable 2、HH、deconvolution（unconfirmed）。
 - 2026-10-21 交付 **Diagnostic 01**（10 题 60 min 答题页 + 分开的 key），用户尚未作答。**Concept Check 01：5/12**——错题集中在特征值→行为链（3 题）和 9/23–9/28 无笔记内容（Euler/stiff/Neumann）；MM 极限也错。诊断修正为"速度 + 概念缺口并存"。正在按 ①→⑨ 逐块复习，从特征值链开始。
+- 2026-10-25：口试定在 **10/28 周三**。Oral-01 P1（2D 不动点/Jacobian）三轮作答：路线错误（不配对、先展开符号）当晚修正，细节错误（k/K、det 符号、不说结论）待周一白纸计时重做验证。QSSA 短回想暴露"QSSA≈饱和"误解，P2 未做。
 - 细节见 `progress/courses/EBME434/exam2/`（course-profile.md / learning-record.md / practice/）。
 - 等待用户：①Diagnostic 01 导出 ②口试/看卷预约 ③每天可投入时间 ④9/23 后为何无个人笔记。
 
