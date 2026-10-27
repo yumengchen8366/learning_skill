@@ -91,3 +91,32 @@ dP/dt = rP − aPI，dI/dt = s + bPI − kI；r=2, a=1, b=0.5, k=1, s=1。
 - (c) (0,1): tr 0, det −1 → **saddle**；(1,2): tr −0.5, det 1, tr²−4det <0 → **stable spiral**，λ = −0.25 ± 0.968i
 - (d) 变的是 **J₂₂ = bP* − k**：s=0 时 P* = k/b 使 J₂₂ = 0；现在 P* = 1 < k/b = 2，J₂₂ = −0.5 < 0 → tr < 0 → 阻尼。（对比 P1：那里阻尼来自 J₁₁）
 - (e) J₁₂·J₂₁ = (−1)(1) < 0 → 负反馈；P 促进 I、I 清除 P。
+
+---
+
+## V1 Key（变体，2026-10-27，sympy 验证）
+
+题：Two cell populations compete for the same niche (e.g., two bacterial strains in a wound):
+dx/dt = x(3 − x − 2y), dy/dt = y(2 − y − x).
+(a) all fixed points (b) Jacobian (symbolic, show the partial-derivative step) (c) classify each (d) feedback type from sign(J₁₂·J₂₁) and what it means biologically (e) one sentence: what happens in the long run if you start near (1,1)?
+
+(a) 拆 dy/dt = y(2 − y − x)=0 → y=0 或 x = 2 − y。
+- y=0 → x(3−x)=0 → (0,0), (3,0)
+- x=2−y → (2−y)(3−(2−y)−2y)= (2−y)(1−y)=0 → y=1 (x=1) 或 y=2 (x=0) → (1,1), (0,2)
+四个点：(0,0) (3,0) (0,2) (1,1)
+
+(b) f₁ = 3x − x² − 2xy，f₂ = 2y − y² − xy
+J = [[3 − 2x − 2y, −2x], [−y, 2 − 2y − x]]
+
+(c)
+| 点 | J | tr | det | λ | 类型 |
+|---|---|---|---|---|---|
+| (0,0) | [[3,0],[0,2]] | 5 | 6 | 3, 2 | unstable node |
+| (3,0) | [[−3,−6],[0,−1]] | −4 | 3 | −3, −1 | stable node |
+| (0,2) | [[−1,0],[−2,−2]] | −3 | 2 | −1, −2 | stable node |
+| (1,1) | [[−1,−2],[−1,−1]] | −2 | **−1** | −1±√2 ≈ 0.41, −2.41 | **saddle** |
+
+(d) J₁₂·J₁₂ at (1,1) = (−2)(−1) = +2 > 0 → **positive feedback**（互相抑制 = mutual inhibition，两次负相乘为正）→ 倾向鞍点/开关（switching, bistability）。对比 P1：负反馈 → 振荡/螺旋；正反馈 → saddle/两个稳定态二选一。
+(e) 从 (1,1) 附近出发，共存点是鞍点，系统会沿不稳定方向离开，最终落到 (3,0) 或 (0,2) 之一——**competitive exclusion**，哪一方赢取决于初始偏向。
+
+针对弱点：C-07 配对（四个点，比 P1 多一个）、C-11 偏导（−2xy 的 ∂/∂y = −2x 型）、C-01 补充 2 结论词、反馈类型反向（正反馈）防止套 P1 答案。
