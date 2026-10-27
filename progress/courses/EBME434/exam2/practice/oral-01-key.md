@@ -80,3 +80,14 @@ dP/dt = rP(1 − P/K) − aPI, dI/dt = bPI − kI, with r=1, K=10, a=1, b=0.5, k
 
 **P2**（白板，约 12 分钟）An enzyme E converts substrate S to product P through complex ES (rates k₁, k₋₁, k₂). A competitive inhibitor I also binds E reversibly to form an inactive complex EI (rates k₃, k₋₃).
 (a) Write the mass-action ODEs. (b) State the conservation laws and use them to reduce the system. (c) Apply QSSA to both complexes and derive v = dp/dt as a function of s and i. Define Vmax, Km, K_I. (d) From v-vs-s data at one fixed inhibitor level, which parameters (or combinations) can be identified? Which can never be separated? (e) Why is QSSA applied to dc/dt and not to ds/dt? (f) What happens to v as s → ∞? Does the inhibitor change this limit?
+
+---
+
+## V1 Key（变体，2026-10-27，sympy 验证）
+
+dP/dt = rP − aPI，dI/dt = s + bPI − kI；r=2, a=1, b=0.5, k=1, s=1。
+- (a) P=0 → I = s/k = 1 → **(0, 1)**；P≠0 → I = r/a = 2 → s + bP·2 − 2k = 0 → P = 1 → **(1, 2)**。（注意 (0,0) 不再是平衡点，因为 s≠0）
+- (b) J = [[r − aI, −aP], [bI, bP − k]]；(0,1): [[1, 0],[0.5, −1]]；(1,2): [[0, −1],[1, −0.5]]
+- (c) (0,1): tr 0, det −1 → **saddle**；(1,2): tr −0.5, det 1, tr²−4det <0 → **stable spiral**，λ = −0.25 ± 0.968i
+- (d) 变的是 **J₂₂ = bP* − k**：s=0 时 P* = k/b 使 J₂₂ = 0；现在 P* = 1 < k/b = 2，J₂₂ = −0.5 < 0 → tr < 0 → 阻尼。（对比 P1：那里阻尼来自 J₁₁）
+- (e) J₁₂·J₂₁ = (−1)(1) < 0 → 负反馈；P 促进 I、I 清除 P。
