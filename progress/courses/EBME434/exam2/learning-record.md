@@ -37,6 +37,7 @@
 | 2026-10-25 | Oral-01 P1（logistic pathogen–immune，原创；key: practice/oral-01-key.md） | C-01, C-07–C-10 | 第 1 稿：各自令零未配对、符号展开特征多项式；第 2 稿：三个不动点正确、两个数字矩阵正确、J₂₂ 用错 K；第 3 稿：λ=1,−2 / 3,−1 正确，第三个常数项符号错，无分类；追问口头答"发散震荡…收敛震荡"不清 | **部分完成** | 独立作答 + 三轮断点提示（未看 key） | Verified computation | 路线型错误（配对、先代点）当晚修正；细节错误（k/K、±det）待白纸重做验证；"说结论"未达标 |
 | 2026-10-26 | Oral-01 P1 白纸计时 15 min 重做（第 4–6 稿） | C-01, C-07–C-11 | 15 min 内只完成 (a)：配对路线正确但 P=1/K（应为 K）、P=K/b（应为 k/b，k/K 第二次）→ (20,−1) 未察觉负数；不计时续做：J₂₂ 用对 k；∂f₁/∂I 错；λ(0,0)=1,−2、λ(10,0)=−1,3 正确；第 6 稿写出 saddle/saddle/stable spiral 全对；(d) 口头答"λ 的指数"（未指出 −2rP/K 项），(e) 负反馈正确 | **部分完成→修正后正确** | 独立 + 两轮断点提示（未看 key） | Verified computation | 路线稳了；速度仍不足（15 min 只到 (a)）；新弱点 C-11 偏导；"生物意义预检"（P=K、I>0）作为新纠正规则 |
 | 2026-10-27 | 八标题白纸回忆（平衡点/线性化/Jacobian/λ/实虚部/分类/反馈/防错） | C-01 全链 | 骨架在（平衡点→J→代点→det(J−λI)→λ→e^{λt}→实虚部）；线性化写成"线性模型"（概念混淆）；分类表空；防错空；QSSA 混入平衡点；虚部按正负分（应为有/无） | 部分 | 独立 | Reasoned | 助手给 8 节中英对照纠正版；用户提出不用 tr/det、用 b²−4ac + 教授表 → 助手确认等价（b=−tr, c=det），改用此路线 |
+| 2026-10-27 | 教授 Practice Problems Exam 1（9/24 Canvas）Q9/Q6/Q4/Q2（白纸，~35 min） | C-03, C-01, 单房室 | Q6 全对（两不动点 + f′ 符号）；Q9 不动点 (0,D₀/λ) ✓、J ✓，未读出三角阵对角线即特征值、未给稳定条件、(b) 未答；Q4(a) 四方程 + 酶守恒 ✓，(b) QSSA 推导未做（自述"忘了"）；Q2 分离变量解出 C₀e^{−kt}、t½=ln2/k，但积分常数绕路，未写物理解释 | Q6 正确；Q9 部分；Q4 部分；Q2 部分 | 独立 | Instructor-authored problems；解答为 Reasoned（助手） | 新信息：教授明言**不要求手算特征值**，重点是 λ 在解中的位置与符号含义。缺口：QSSA 四步（无抑制剂版）、三角阵直接读 λ、"解释型"口头题的英文句子 |
 | 2026-10-27 | V1 变体（竞争模型 x(3−x−2y), y(2−y−x)；key 在 oral-01-key.md 末尾） | C-07, C-11, C-01 补充 2 | 第 1 稿（15 min）：抄串 2−y→2−2y（第 4 次）、展开 x·x 写成 3x²、漏共存点、无结论词；第 2 稿：方程/展开/J/三个边界点及 λ 全对，仍漏 (1,1)；第 3 稿：(1,1) 求出，J 对，(λ+1)² 符号错、判别式>0 却答"振荡"，结论词三个对一个错；(d) 答"正"✓，(e) 不知道 | **部分→修正后完成** | 独立 + 3 轮提示 | Verified computation | 偏导三格独立正确（C-11 改善）；"2×2 四种组合"配对规则新增；实根≠振荡第三次出现（C-01 补充 2 仍是最大风险）；竞争排斥/正反馈=互相抑制为新讲解内容 |
 | 2026-10-26 | Oral-01 P2（MM+竞争抑制，原创；key: practice/oral-01-key.md） | C-03, C-03 补充 | (a) 6 个 mass-action ODE 全对；(b) 自己用相加为零验出酶守恒；(c) 代入守恒+双 QSSA，独立得到 K_I=k₋₃/k₃、Km=(k₋₁+k₂)/k₁，卡在"认出 e₀−ES−EI=E"，点拨后独立完成 v=k₂(s/Km)e₀/(1+s/Km+I/K_I)，最终化简由助手给出；(d)"许多个"✗、两对不可分 ✓；(e) 对一半；(f) ✓ | **部分完成→完成** | 独立 + 3 次方向提示（未看 key） | Verified computation | 推导链路线正确，速度可（约 50 min 含讲解）；概念缺口：可辨识个数=2、QSSA≠饱和 |
 | 2026-10-26 | 速练 6 题（给定数字 Jacobian → tr/det/结论词；12 min） | C-01 补充 2 | Q1 λ=−3,−2 却判"一正一负 saddle"；Q2 λ²+4=0 写成 λ=±2 real saddle；Q3 saddle ✓；Q4 stable spiral ✓；Q5 unstable spiral ✓；Q6 unstable ✓。全程用特征多项式，未写 tr/det | **4/6** | 独立 | Verified computation（助手手算 key） | 两错同类：λ 算对、读错（符号/虚根）。纠正：先 tr/det 定结论再算 λ 校验；saddle⟺det<0⟺一正一负 |
@@ -56,6 +57,11 @@
 文件：`practice/diagnostic-01.html`（答题页，60 min 计时、自动保存、导出 md/json）+ `practice/diagnostic-01-key.md`。也写到用户电脑 `EBME-434 Modeling/Claude outputs/Diagnostic-01/`。
 覆盖：Q1 单房室+量纲+无量纲 · Q2 两房室特征值 · Q3 MM 极限+可辨识 · Q4 竞争模型不动点/分类/反馈 · Q5 Euler/stiffness · Q6 扩散推导+IC/BC+单位 · Q7 特征尺度+无量纲群 · Q8 平板稳态扩散-反应 · Q9 MoL · Q10 Nernst/GHK/电路。全部原创情境；数值用 Python 验证（Q6、Q9 为 reasoned）。
 设计意图：故意略超 60 min，"没做完"勾选是主要诊断信号。
+
+## Exam 1 官方范围（教授 9/24 公告，2026-10-27 录入）
+
+- Units & dimensional analysis · Compartment models（single/multi/PBPK，first-order rate 含义，mass balance，解简单 ODE，解释解）· PK models · 两线性 ODE 系统的解（**不要求手算 eigen，但要知道它们在解里的位置**）· Enzyme kinetics（mass action）· MM（方程、QSSA、推导）· Equilibrium/fixed points（找、分类、含义）· Feedback（正/负判断）
+- Practice Problems PDF（9 题）：Q1 单位 · Q2 k/τ/t½ 口头 · Q3 非线性清除无量纲化 · Q4 MM · Q5 两房室解的形式/λ 实负/快慢相 · Q6 1D 不动点 · Q7 单房室三种给药 · Q8 透析两房室建模 · Q9 tumor–drug 2D
 
 ## 待解决问题
 
