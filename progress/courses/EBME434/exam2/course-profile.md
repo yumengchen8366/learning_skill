@@ -35,6 +35,7 @@
 | S13 | Oct 23 postlecture – Cable Equation part 1（5 页，实为 part 2） | 同上 | 是（2026-11-02 逐页） | r_m/c_m/r_a 推导与单位、五条假设、四电流 KCL、λ、τ_m、有髓/无髓 PDE、RHS −λ²∂²V_e/∂x² |
 | S14 | Practice Problems Exam 2（2 页，4 题） | `Practice Problems/` | 是（2026-11-02） | Q1 柱 MoL(kC)、Q2 膜 mass balance+BC、Q3 passive cable 稳态/lumped、Q4 双层膜 4 PDE |
 | S15 | 朋友课堂笔记 7 页（10/14–10/28，含 10/26、10/28 无 postlecture 的内容） | 对话图片 | 是（2026-11-02） | 稳态解 V₀e^{−|x|/λ}、注入电流 V₀=I₀r_aλ/2、HH m³h/n⁴、active 电路 |
+| S17 | 教授课堂口头说明（录音转写截图，日期未注明，约 10/26–28） | 对话图片 | 是 | 原话："in terms of the exam, really, it's going to be on diffusion models, PDE models. You do need to understand the method of lines... Method of Lines is your solution... And then cable models. They're just a diffusion model anyway." → 考试主轴 = 扩散 PDE + MoL；cable 按扩散模型考 |
 | S16 | 教授 Exam 2 topic list 邮件（11/1） | 对话粘贴 | 是 | 范围：Units、模型方程、Fick 推导、扩散+反应/对流、径向、BC、MoL、稳态解、lumped、膜电路、active/passive、cable 参数、解 |
 | S10 | HW3（due 10/30） | `HW/EBME 434 2026 Homework 3-1.pdf` | 是 | Q1 特征尺度/无量纲；Q2 球壳稳态扩散-反应；Q3 MoL + 代码 |
 | S11 | 用户项目笔记（课程地图、MM、Feedback、Equilibrium、单房室） | claude.ai 项目 docs | 是 | Exam 1 范围与例题 |
