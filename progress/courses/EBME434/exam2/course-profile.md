@@ -30,11 +30,16 @@
 | S6 | October 7 postlecture – Radial Diffusion | 同上 | 是 | 柱/球坐标扩散、Krogh 稳态积分两次 |
 | S7 | Oct 12 postlecture – One more thing about Diffusion | 同上 | 是 | t_diff = L²/D、ℓ_diff = √(Dt)、无量纲化 τ = Dt/L² |
 | S8 | Oct 14 postlecture – Method of Lines | 同上 | 是 | 有限差分、MoL、边界节点处理 |
-| S9 | Oct 14 postlecture – Membrane Potentials & Equivalent Circuits | 同上 | 是 | Nernst、GHK、等效电路（只到图） |
+| S9 | Oct 14 postlecture – Membrane Potentials & Equivalent Circuits | 同上 | 是（2026-11-02 逐页） | Nernst 推导+单位、E_K=−89 mV、GHK 例 −72.4 mV、等效电路 |
+| S12 | Oct 21 postlecture – Cable Equation part 1（4 页） | 同上 | 是（2026-11-02 逐页） | KCL/KVL、Ohm、电容、无源膜 ODE、轴突模型、r_m 开头 |
+| S13 | Oct 23 postlecture – Cable Equation part 1（5 页，实为 part 2） | 同上 | 是（2026-11-02 逐页） | r_m/c_m/r_a 推导与单位、五条假设、四电流 KCL、λ、τ_m、有髓/无髓 PDE、RHS −λ²∂²V_e/∂x² |
+| S14 | Practice Problems Exam 2（2 页，4 题） | `Practice Problems/` | 是（2026-11-02） | Q1 柱 MoL(kC)、Q2 膜 mass balance+BC、Q3 passive cable 稳态/lumped、Q4 双层膜 4 PDE |
+| S15 | 朋友课堂笔记 7 页（10/14–10/28，含 10/26、10/28 无 postlecture 的内容） | 对话图片 | 是（2026-11-02） | 稳态解 V₀e^{−|x|/λ}、注入电流 V₀=I₀r_aλ/2、HH m³h/n⁴、active 电路 |
+| S16 | 教授 Exam 2 topic list 邮件（11/1） | 对话粘贴 | 是 | 范围：Units、模型方程、Fick 推导、扩散+反应/对流、径向、BC、MoL、稳态解、lumped、膜电路、active/passive、cable 参数、解 |
 | S10 | HW3（due 10/30） | `HW/EBME 434 2026 Homework 3-1.pdf` | 是 | Q1 特征尺度/无量纲；Q2 球壳稳态扩散-反应；Q3 MoL + 代码 |
 | S11 | 用户项目笔记（课程地图、MM、Feedback、Equilibrium、单房室） | claude.ai 项目 docs | 是 | Exam 1 范围与例题 |
 
-**用户自己的笔记（YC Class Notes）只到 9/21**；9/23 之后无个人笔记（用户尚未说明原因）。
+**用户自己的笔记（YC Class Notes）只到 9/21**；9/23 之后无个人笔记。**2026-11-02 核对发现（S4–S9、S12–S13 逐页）**：① MoL Neumann 边界她用 backward difference (C_{N+1}−C_N)/h=0 ⇒ C_{N+1}=C_N，不是 ghost node；② Robin BC 在 x=0 面写 D∂C/∂x|₀ = k_c C(0,t)（正号）；③ 9/28 推导无反应项，反应项在 10/7 直接加；④ 10/12 无量纲化只做纯扩散，kL²/D 为延伸；⑤ cable 轴向电阻记号 r_a（9/28 p1 曾写 r_i）；⑥ 10/23 她标注 Δx 形式 = "finite diff (M.O.L.)"；⑦ 无 10/26、10/28 postlecture 文件。
 
 ## 实际授课顺序（与 syllabus 不同，以讲义文件为准）
 
@@ -61,8 +66,8 @@
 | T8 | MoL 离散与边界处理 | **in scope** | S8, S10 Q3 |
 | T8b | Nernst / GHK / 等效电路 | **in scope** | S9 |
 | T9 | Cable theory 2 | in scope（材料待补：10/21 讲义/录像） | — |
-| T10 | HH model | in scope（材料待补：10/26, 10/28） | — |
-| T11a | Deconvolution（11/2） | **unconfirmed** | 考前两天；Exam 1 同样位置的 9/28 PDE 是否考过未知 |
+| T10 | HH model | **教授 topic list 未列**；只到 "active vs passive" 概念 | S16, S15 |
+| T11a | Deconvolution | **excluded**（11/2 课取消；topic list 未列） | S16 |
 | T1–T5 | Exam 1 内容 | foundation；口试直接考 | S11 |
 
 ## 待解决

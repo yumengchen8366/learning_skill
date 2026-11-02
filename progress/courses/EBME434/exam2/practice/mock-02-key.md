@@ -25,8 +25,9 @@
 ## Q3  τ_m ∂V/∂t = λ² ∂²V/∂x² − V，x=0 clamped V₀，x=L sealed，网格 i=0…N，h=L/N
 (a) 内部 i=1…N−1：dVᵢ/dt = (λ²/τ_m)(Vᵢ₊₁ − 2Vᵢ + Vᵢ₋₁)/h² − Vᵢ/τ_m
 (b) x=0：V₀ 已知，不写 ODE；i=1 方程里 Vᵢ₋₁ = V₀。
-    x=L sealed ⇒ ∂V/∂x=0 ⇒ (V_{N+1} − V_{N−1})/(2h)=0 ⇒ V_{N+1}=V_{N−1}
-    dV_N/dt = (λ²/τ_m)(2V_{N−1} − 2V_N)/h² − V_N/τ_m
+    x=L sealed ⇒ ∂V/∂x=0。**教授 10/14 p4 的版本（backward difference）**：(V_{N+1} − V_N)/h = 0 ⇒ V_{N+1} = V_N
+    ⇒ dV_N/dt = (λ²/τ_m)(−V_N + V_{N−1})/h² − V_N/τ_m   ← 考试按这个
+    （ghost node 版 V_{N+1}=V_{N−1} ⇒ (2V_{N−1} − 2V_N)/h² 也正确，但不是她讲义的写法；11/2 核对后修订）
 (c) h 减半 → 最快时间尺度 ∝ h²/λ²·τ_m → 最大 |特征值| 变 4 倍 → Forward Euler 的 Δt 上限（2/|λ_max|）要**除以 4**；系统更 stiff，用 lsoda/ode15s。
 
 ## Q4  [Na]ₒ=145 mM，[Na]ᵢ=15 mM，T=310 K；轴突 a 变 2 倍
