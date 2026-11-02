@@ -35,6 +35,7 @@
 | 日期 | 题目 | Concept | 用户答案 | 结果 | 协助 | 答案依据 | 反馈 |
 |---|---|---|---|---|---|---|---|
 | — | Diagnostic 01（10 题，60 min，已交付，未作答） | T1–T5b, T7, T8, T8b | — | 未作答 | — | key 见 practice/diagnostic-01-key.md | — |
+| 2026-11-02 11:00 | Mock-02（key: practice/mock-02-key.md） | T7, T8, T8b, T9 | Q1(a) 1250 s ✓ 未换分钟；(b) 比较符号写反（600>1250）、用 1255 算且未开根号；(c) ξ 定义错、方程与 kL²/D 未写。Q2(a) ∂²C/∂t（A1 第 6 次）、**漏 D**、单位行不一致；(b) 两 BC 都写成 ∂C/∂t；(c)(d) 未做，改做 MoL 且又给 C_{N+1} 写 ODE。Q3 只抄 PDE；Q4 空白 | Q1 部分；Q2 部分；Q3/Q4 未作答 | 独立 | Verified computation / Reasoned | 教授 11/1 topic list 已到：Units、模型方程、Fick 推导、扩散+反应/对流、径向、BC、MoL、稳态解、lumped 解、膜电路、active/passive、cable 参数与解；**无 HH、无 deconvolution**。按此写项目文档 `Exam2-教授考纲对照知识点.md`（标 ✅⚠️❌）。用户选择先梳理知识点再重做 Q2bcd/Q3/Q4 |
 | 2026-10-21 | Concept Check 01（12 题选择，quiz 卡片，不计时） | 见上 | 对：Q1 单位、Q4 可辨识、Q10 t_diff、Q11 MoL、Q12 Nernst；错：Q2 终末相、Q3 MM 极限、Q5 det<0、Q6 纯虚根、Q7 Euler Δt、Q8 stiff 定义、Q9 Neumann | **5/12** | 独立（未报告看提示） | Reasoned（概念题） | 错题集中在"特征值→行为"链（3 题）和 9/23–9/28 无笔记内容（3 题）；修正"纯速度问题"假设 → **速度 + 概念缺口并存** |
 
 | 2026-10-25 | Oral-01 P1（logistic pathogen–immune，原创；key: practice/oral-01-key.md） | C-01, C-07–C-10 | 第 1 稿：各自令零未配对、符号展开特征多项式；第 2 稿：三个不动点正确、两个数字矩阵正确、J₂₂ 用错 K；第 3 稿：λ=1,−2 / 3,−1 正确，第三个常数项符号错，无分类；追问口头答"发散震荡…收敛震荡"不清 | **部分完成** | 独立作答 + 三轮断点提示（未看 key） | Verified computation | 路线型错误（配对、先代点）当晚修正；细节错误（k/K、±det）待白纸重做验证；"说结论"未达标 |
@@ -80,6 +81,7 @@
 
 ## 下次会话指针
 
+- **2026-11-02 11:15 状态**：Mock-02 已批（见作答历史）。课取消。下一步：用户读完考纲对照文档后重做 Q2(b)(c)(d)、Q3、Q4 → 批改。新证据：BC 写成时间导数（C-05 延伸）、径向 PDE 漏 D、给已知节点写 ODE 第 2 次。
 - **2026-11-02 00:45 状态**：Exam 2 在 11/4。10/31–11/1 用户已独立做完教授 Practice Problems Exam 2 的 Q1、Q2、Q4 并纠错（错题汇总在 claude.ai 项目文档 `Exam2-错题记录.md`：系统性错误 A1 t/x 混写 ×5+、A2 一阶/二阶差分混用、A3 Dirichlet/Neumann 反、A4 界面关系代进 PDE、A5 解参数而非解函数）；Q3(a) 做过（犯 A5），Q3(b) 未独立做。今晚交付：① 项目文档 `Exam2-一页公式与推导清单.md`（未对照讲义原文逐字核对，10/26–28 HH 讲义未读）；② Mock-02 四题在聊天里，key 在 `practice/mock-02-key.md`。**等用户作答 Mock-02 → 按 A1–A5 批改 → 记入作答历史**。
 
 - **2026-10-28 11:08 交接**：用户要求在新会话开始 HW3 + Exam 2。新会话第一步问三件事：① HW3 哪些题动过（`Claude /tmp_hw3` 内容）② 今明各几小时 ③ 缺哪些录像（9/23、9/28、10/21、10/26），请用户把 10/21、10/26 postlecture 放进 Professor Class Notes。C-14 不单独练，并入 HW3 Q2（球壳 mass balance）。
