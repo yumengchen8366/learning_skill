@@ -88,6 +88,7 @@
 ## 下次会话指针
 
 - **2026-11-03 13:00 状态**：上午重做已批（见作答历史）。下午顺序改为：① 15 min 修复（10 条 BC 用 C(…,t)/∂C/∂x(…,t) 重写；练习题 1 i=N 行重写；Mock Q2(c)(d) 积分两次做完）→ ② Mock-03 50 min → ③ cable 复习 → 晚上错题记录。
+- **2026-11-03 15:30 状态**：**教授 office hour 确认：MoL 一阶导用 backward (Cᵢ−Cᵢ₋₁)/h，不是 central**——助手此前给的 central 是错的，公式总表与 MoL 专题两份文档已改正。上午重做 5 题已批：练习题 1 PDE 抄全✓ / 一阶差分仍写成三项✗ / i=N 反应项写成 −kAe^{−αt}✗；Mock Q2 **又做成 MoL，稳态积分两次仍 0 次独立完成**（最大的洞）；练习题 4 四个 PDE 全对✓ 但 **8 条 BC 全写成 ∂C/∂t**✗ 且漏通量连续；练习题 3 两个解最终全对✓（先犯 A5 后自救）；Mock Q4 参数因子 ½ ¼ √2 对✓、c_m 空、E_Na 算成 145 mV✗（应 ≈+61）。用户选择跳过 mock-03，改做题型专练（PDF `Exam2-题型专练.pdf`，key: practice/drill-11-03-key.md），覆盖 A 边界条件与 ∂t/∂x、B 稳态积分×3、C MoL×2、D Cable、E 膜电位。HH 范围用户未问到（其“要背公式”是自行推测，非教授原话；topic list 与口头说明均未提 HH）。
 - **2026-11-03 11:10 状态**：考前一天计划已定：上午重做 5 题（练习题 1、Mock Q2bcd、练习题 4、练习题 3ab、Mock Q4；PDF `Exam2-上午重做5题.pdf`）→ 下午 Mock-03（3 题 50 min；PDF `Exam2-Mock03-50min.pdf`；key 在 practice/mock-03-key.md）→ cable 复习 → 晚上只看错题记录/公式总表。两份 PDF 在课程文件夹 Claude outputs。等作答。
 - **2026-11-02 22:00 状态**：MoL 三题已批（见作答历史 21:50）。HW3 Q3 独立正确——MoL 的骨架稳了；剩两个点：练习题 1 的径向项（1/rᵢ central + 二阶）、i=N 替换要做到底。**明天 11/3 计划**：早上 MoL 自测 T1–T3（key: practice/mol-selftest-key.md）+ 写模型题一道 + 稳态积分两次一道（限时 50 min 当 mock）→ 批改 → 晚上错题记录 + 一页清单 + 差分卡片。
 - **2026-11-02 18:45 状态**：按教授口头重点（S17）写 `Exam2-MoL专题-知识点与应用.md`（项目文档；含 §9 自测 T1–T3，key 在 practice/mol-selftest-key.md）。等用户作答 T1–T3 或重做 Q2bcd/Q3/Q4。
